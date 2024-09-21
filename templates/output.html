@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Segmentation Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        .flash-messages {
+            color: green;
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .image-box {
+            text-align: center;
+            margin: 15px;
+            flex: 1 1 45%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        .image-box h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .nav-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Segmentation Results</h1>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flash-messages">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <div class="image-container">
+            <div class="image-box">
+                <h2>RGB Image</h2>
+                <img src="{{ url_for('static', filename='output_images/' + uploaded_image) }}" alt="RGB Image">
+            </div>
+            <div class="image-box">
+                <h2>Segmented Image</h2>
+                <img src="{{ url_for('static', filename='output_images/' + segmented_image) }}" alt="Segmented Image">
+            </div>
+        </div>
+
+        <a href="{{ url_for('upload') }}" class="nav-link">Upload Another Image</a>
+    </div>
+</body>
+</html>
