@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Segmentation Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image for Segmentation</h1>
 
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+            <div class="file-input">
+                <label for="file">Choose Image</label>
+                <input type="file" name="file" id="file" accept="image/*" required>
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+
+        {% if uploaded_image and segmented_image %}
+        <div class="image-preview">
+            <h2>Uploaded Image:</h2>
+            <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image" width="300">
+
+            <h2>Segmented Image:</h2>
+            <img src="{{ url_for('static', filename='output/' + segmented_image) }}" alt="Segmented Image" width="300">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
