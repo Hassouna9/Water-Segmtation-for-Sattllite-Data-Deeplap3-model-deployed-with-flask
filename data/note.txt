@@ -1,0 +1,6 @@
+Training and Validation images and masks should be place here in the following file names:
+- train_images
+- train_masks
+- val_images
+- val_masks
+The model assumes taking .tif images which has 12 channels ( Sattallite Images ) as input for images but .png for the masks.
